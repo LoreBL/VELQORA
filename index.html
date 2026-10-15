@@ -1,106 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#faf9ff">
-<title>VELQORA — Scegli meglio</title>
+<meta name="description" content="VELQORA: cerca, filtra e confronta prodotti per scegliere con più consapevolezza.">
+<title>VELQORA — Scelte migliori</title>
 <style>
-:root{--p:#7552d6;--dark:#211b32;--muted:#777185;--line:#ece8f3;--bg:#faf9fc}
+:root{--purple:#7552d6;--dark:#211b32;--muted:#777185;--line:#ece8f3;--bg:#faf9fc}
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--dark);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,select{font:inherit}button{cursor:pointer}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
 header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-.nav{max-width:1200px;margin:auto;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:15px}
-.logo{font-size:25px;letter-spacing:5px;font-weight:850;color:var(--p)}
-.logo small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:3px}
-a{color:var(--p)}
+.nav{max-width:1200px;margin:auto;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:24px;letter-spacing:5px;font-weight:850;color:var(--purple);text-decoration:none}
+.logo small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:500;margin-top:3px}
 .navlinks{display:flex;gap:20px;align-items:center}
-.navlinks a{text-decoration:none;color:var(--dark);font-size:14px}
-.primary{border:0;border-radius:12px;background:var(--p);color:white;padding:12px 17px;font-weight:700}
-main{max-width:1200px;margin:auto;padding:25px 24px 65px}
-.hero{padding:48px 0 32px;max-width:800px}
-.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:2px;font-weight:800;color:var(--p)}
-h1{font-size:clamp(38px,6vw,65px);line-height:1.05;letter-spacing:-2.5px;margin:15px 0}
-h1 span{color:var(--p)}
+.navlinks a{text-decoration:none;font-size:13px}
+.primary{border:0;background:var(--purple);color:white;padding:12px 17px;border-radius:12px;font-weight:700}
+main{max-width:1200px;margin:auto;padding:30px 24px 65px}
+.hero{padding:42px 0 30px;max-width:810px}
+.eyebrow{color:var(--purple);font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase}
+h1{font-size:clamp(38px,6vw,64px);line-height:1.04;letter-spacing:-2.6px;margin:15px 0}
+h1 span{color:var(--purple)}
 .hero p{font-size:17px;line-height:1.7;color:var(--muted);max-width:650px}
-.searchbox{display:flex;gap:10px;margin-top:24px;max-width:750px}
-input,select{border:1px solid #e5e0ed;border-radius:12px;background:white;color:var(--dark);padding:13px;min-width:0}
-.searchbox input{flex:1}
-input:focus,select:focus{outline:2px solid #d6c8ff}
-.heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:35px 0 18px}
-h2{font-size:25px;letter-spacing:-.6px;margin:0 0 6px}
-.sub{font-size:13px;line-height:1.5;color:var(--muted)}
-.categories,.filters{display:flex;gap:9px;flex-wrap:wrap;margin:15px 0}
-.categories{overflow-x:auto;flex-wrap:nowrap;padding-bottom:10px}
+.searchbox{display:flex;gap:10px;margin-top:24px;max-width:760px}
+.searchbox input{flex:1;min-width:0}
+input,select{background:#fff;border:1px solid #e5e0ed;border-radius:12px;padding:13px;color:var(--dark);outline:none}
+input:focus,select:focus{border-color:var(--purple);box-shadow:0 0 0 3px #7552d61b}
+.heading{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:34px 0 17px}
+h2{font-size:25px;letter-spacing:-.7px;margin:0 0 7px}
+.sub{color:var(--muted);font-size:13px;line-height:1.55}
+.categories{display:flex;gap:9px;overflow-x:auto;padding:3px 0 12px}
 .cat{white-space:nowrap;border:1px solid var(--line);background:white;border-radius:30px;padding:10px 15px;color:#625b70}
 .cat.active{background:var(--dark);color:white;border-color:var(--dark)}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0 20px}
 .filters input{width:160px}
 .filters select{max-width:220px}
-.status{font-size:13px;color:var(--muted);margin:15px 0}
-.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
-.card{background:white;border:1px solid var(--line);border-radius:19px;padding:15px;display:flex;flex-direction:column;min-width:0;transition:.2s}
-.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px #2917470b}
-.photo{height:220px;background:#f5f2fa;border-radius:13px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:15px}
-.photo img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
-.photo img.category-photo{object-fit:cover;mix-blend-mode:normal}
-.tag{font-size:11px;padding:6px 9px;border-radius:20px;background:#f0ebff;color:#6344b8;align-self:flex-start;font-weight:750}
+.status{font-size:13px;color:var(--muted);margin:12px 0}
+.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:19px;padding:16px;display:flex;flex-direction:column;min-width:0;transition:transform .18s,border-color .18s,box-shadow .18s}
+.card:hover{transform:translateY(-3px);border-color:#d4c7f4;box-shadow:0 10px 28px #2917470b}
+.photo{height:210px;border-radius:13px;background:linear-gradient(135deg,#f2effb,#fbfaff);overflow:hidden;display:grid;place-items:center;margin-bottom:15px}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo img.product-photo{object-fit:contain;padding:12px;mix-blend-mode:multiply}
+.fallback{font-size:54px}
+.tag{display:inline-flex;align-self:flex-start;font-size:11px;padding:6px 9px;border-radius:30px;background:#f0ebff;color:#6344b8;font-weight:750}
 .tag.verify{background:#fff4dd;color:#8b6113}
 .card h3{font-size:17px;line-height:1.4;margin:11px 0 7px}
 .description{font-size:13px;color:var(--muted);line-height:1.55;min-height:40px}
 .price{font-size:22px;font-weight:800;margin:14px 0 5px}
-.price.na{font-size:14px;color:var(--muted)}
+.price.na{font-size:14px;color:#8a8494;font-weight:650}
 .source{font-size:11px;color:var(--muted);margin-bottom:14px}
 .actions{display:flex;gap:8px;margin-top:auto}
-.actions button{flex:1;border:1px solid var(--line);border-radius:10px;background:white;padding:10px;font-size:12px;font-weight:700}
-.actions .compare{color:var(--p);border-color:#d8cdf5}
+.actions button{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px;font-size:12px;font-weight:700}
+.actions .compare{color:var(--purple);border-color:#d8cdf5}
 .actions .selected{background:#f0ebff}
 .empty{grid-column:1/-1;padding:40px;text-align:center;border:1px dashed #d8d0e6;border-radius:18px;color:var(--muted)}
-.pagination{display:flex;justify-content:center;align-items:center;gap:10px;margin:28px 0}
-.pagination button{background:white;border:1px solid var(--line);border-radius:9px;padding:10px 14px}
-.pagination button:disabled{opacity:.4}
-.comparebar{display:none;position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:min(720px,calc(100% - 24px));background:#241d35;color:white;border-radius:17px;padding:14px 17px;align-items:center;justify-content:space-between;gap:12px;z-index:10;box-shadow:0 12px 45px #20152c35}
+.pagination{display:flex;justify-content:center;gap:8px;align-items:center;margin:28px 0}
+.pagination button{border:1px solid var(--line);background:white;border-radius:9px;padding:10px 14px}
+.pagination button:disabled{opacity:.4;cursor:default}
+.comparebar{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:min(720px,calc(100% - 24px));background:#241d35;color:white;border-radius:17px;padding:14px 17px;display:none;align-items:center;justify-content:space-between;gap:15px;z-index:10;box-shadow:0 12px 45px #20152c35}
 .comparebar.show{display:flex}
 .comparebar small{display:block;color:#d2cbe0;margin-top:4px}
-.comparebar button{background:white;color:var(--dark);border:0;border-radius:10px;padding:10px;font-weight:700}
+.comparebar button{background:white;color:var(--dark);border:0;border-radius:10px;padding:11px 14px;font-weight:700}
 .comparebar .clear{background:transparent;color:#e1d9ef}
-footer{background:white;border-top:1px solid var(--line);padding:27px 24px}
-.foot{max-width:1200px;margin:auto;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
-dialog{width:min(850px,calc(100% - 24px));max-height:85vh;border:1px solid var(--line);border-radius:18px;padding:23px;color:var(--dark)}
+footer{background:white;border-top:1px solid var(--line);padding:28px 24px;color:var(--muted);font-size:13px}
+.foot{max-width:1200px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+dialog{width:min(850px,calc(100% - 24px));max-height:85vh;border:1px solid var(--line);border-radius:18px;padding:24px;color:var(--dark)}
 dialog::backdrop{background:#20152c80}
 .dialogtop{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.dialogtop button{border:0;border-radius:9px;padding:10px}
-.tablewrap{overflow:auto;margin-top:18px}
+.dialogtop button{border:0;background:#f2eff8;border-radius:9px;padding:9px 13px}
+.tablewrap{overflow-x:auto;margin-top:18px}
 table{width:100%;border-collapse:collapse;font-size:13px}
-td,th{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+th,td{text-align:left;padding:13px;border-bottom:1px solid var(--line);vertical-align:top}
 th{background:#f8f6fc}
 @media(max-width:850px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.navlinks a{display:none}.photo{height:190px}}
-@media(max-width:540px){main{padding:18px 14px 60px}.nav{padding:14px}.logo{font-size:21px}.hero{padding:30px 0 20px}h1{letter-spacing:-1.5px}.searchbox{flex-direction:column}.products{grid-template-columns:1fr}.photo{height:230px}.filters input,.filters select{width:100%;max-width:none;flex:1}.heading{align-items:start;flex-direction:column}}
+@media(max-width:540px){
+main{padding:18px 14px 60px}.nav{padding:14px}.logo{font-size:21px}
+.hero{padding:28px 0 20px}h1{letter-spacing:-1.5px}
+.searchbox{flex-direction:column}.products{grid-template-columns:1fr}
+.photo{height:230px}.heading{align-items:start;flex-direction:column}
+.filters input,.filters select{width:100%;max-width:none;flex:1}
+.comparebar{align-items:flex-start}.comparebar button{padding:10px}.comparebar .clear{display:none}
+}
 </style>
 </head>
 <body>
 <header>
 <div class="nav">
-<a href="#" style="text-decoration:none"><div class="logo">VELQORA<small>SCEGLI MEGLIO. SCEGLI TU.</small></div></a>
-<div class="navlinks"><a href="#catalogo">Esplora</a><a href="#come-funziona">Come funziona</a><button class="primary" onclick="openComparison()">Confronta <span id="navcount">0</span></button></div>
+<a class="logo" href="#top">VELQORA<small>SCEGLI MEGLIO. SCEGLI TU.</small></a>
+<nav class="navlinks">
+<a href="#catalogo">Esplora</a>
+<a href="#come-funziona">Come funziona</a>
+<button class="primary" onclick="openComparison()">Confronta <span id="navcount">0</span></button>
+</nav>
 </div>
 </header>
 
-<main>
+<main id="top">
 <section class="hero">
 <div class="eyebrow">Il tuo prossimo acquisto, con criterio</div>
 <h1>Meno dubbi.<br><span>Scelte migliori.</span></h1>
 <p>Confronta prodotti, esplora alternative e trova quello più adatto alle tue esigenze. Informazioni chiare, senza perdere ore tra decine di schede.</p>
-<div class="searchbox"><input id="search" type="search" placeholder="Es. iPhone, cuffie, friggitrice..." aria-label="Cerca prodotti"><button class="primary" onclick="applySearch()">Cerca prodotti ↗</button></div>
+<div class="searchbox">
+<input id="search" type="search" placeholder="Es. smartphone, cuffie, friggitrice..." aria-label="Cerca prodotti">
+<button class="primary" onclick="applySearch()">Cerca prodotti ↗</button>
+</div>
 </section>
 
 <section id="catalogo">
-<div class="heading"><div><h2>Esplora il catalogo</h2><div class="sub">Filtra e confronta le alternative in un unico posto.</div></div><div class="sub">Catalogo in evoluzione</div></div>
+<div class="heading">
+<div><h2>Esplora il catalogo</h2><div class="sub">Filtra e confronta le alternative in un unico posto.</div></div>
+<div class="sub">500 schede · Catalogo in evoluzione</div>
+</div>
 <div class="categories" id="categories"></div>
 <div class="filters">
-<input id="budget" type="number" min="0" placeholder="Budget massimo €">
+<input id="budget" type="number" min="0" placeholder="Budget massimo €" aria-label="Budget massimo">
 <select id="brand"><option value="">Tutti i marchi</option></select>
-<select id="sort"><option value="recommended">Ordine consigliato</option><option value="priceAsc">Prezzo crescente</option><option value="priceDesc">Prezzo decrescente</option><option value="name">Nome A–Z</option></select>
+<select id="sort" aria-label="Ordina prodotti">
+<option value="recommended">Ordine consigliato</option>
+<option value="priceAsc">Prezzo crescente</option>
+<option value="priceDesc">Prezzo decrescente</option>
+<option value="name">Nome A–Z</option>
+</select>
 <button class="cat" onclick="resetFilters()">Azzera filtri</button>
 </div>
 <div id="status" class="status" aria-live="polite"></div>
@@ -109,26 +135,41 @@ th{background:#f8f6fc}
 </section>
 
 <section id="come-funziona" style="margin-top:55px">
-<div class="heading"><div><h2>Acquistare con più consapevolezza</h2><div class="sub">Un percorso semplice, pensato intorno alle tue esigenze.</div></div></div>
+<div class="heading"><div><h2>Acquistare con più consapevolezza</h2><div class="sub">Cerca, confronta e verifica le informazioni prima di decidere.</div></div></div>
 <div class="products">
-<article class="card"><div class="photo"><img class="category-photo" alt="Ricerca di prodotti" src="https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=700&q=80"></div><h3>01. Cerca</h3><div class="description">Indica il prodotto o la categoria che ti interessa e restringi i risultati con i filtri.</div></article>
-<article class="card"><div class="photo"><img class="category-photo" alt="Dispositivi tecnologici" src="https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=700&q=80"></div><h3>02. Confronta</h3><div class="description">Seleziona fino a tre schede e metti a confronto le informazioni disponibili.</div></article>
-<article class="card"><div class="photo"><img class="category-photo" alt="Computer portatile" src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80"></div><h3>03. Approfondisci</h3><div class="description">Controlla la fonte e verifica prezzi, disponibilità e caratteristiche prima di acquistare.</div></article>
+<article class="card">
+<div class="photo"><img loading="lazy" alt="Esempio di prodotti tecnologici" src="https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=700&q=80"></div>
+<h3>01. Cerca</h3><div class="description">Indica il prodotto o la categoria che ti interessa e restringi i risultati con i filtri.</div>
+</article>
+<article class="card">
+<div class="photo"><img loading="lazy" alt="Dispositivi da confrontare" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80"></div>
+<h3>02. Confronta</h3><div class="description">Seleziona fino a tre schede e metti a confronto le informazioni disponibili.</div>
+</article>
+<article class="card">
+<div class="photo"><img loading="lazy" alt="Computer portatile" src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80"></div>
+<h3>03. Approfondisci</h3><div class="description">Controlla la fonte e verifica prezzi, disponibilità e caratteristiche prima di acquistare.</div>
+</article>
 </div>
 </section>
-<p class="sub" style="margin-top:30px">Trasparenza: le immagini illustrative possono rappresentare la categoria e non il modello esatto. Prezzi e caratteristiche sono indicativi, non aggiornati in tempo reale. Verifica sempre le informazioni presso il produttore o il rivenditore.</p>
+<p class="sub" style="margin-top:30px">Trasparenza: le immagini sono illustrative e possono non rappresentare il modello esatto. Le schede segnaposto non sono prodotti verificati. I prezzi indicati sono stime da confermare e non vengono aggiornati in tempo reale.</p>
 </main>
 
-<footer><div class="foot"><strong style="letter-spacing:3px;color:var(--p)">VELQORA</strong><span class="sub">Confronti più chiari. Decisioni più consapevoli.</span><span class="sub">© 2026 VELQORA</span></div></footer>
+<footer><div class="foot"><strong style="letter-spacing:3px;color:var(--purple)">VELQORA</strong><span>Confronti più chiari. Decisioni più consapevoli.</span><span>© 2026 VELQORA</span></div></footer>
 
-<div class="comparebar" id="comparebar"><div><strong id="comparetitle">Confronto prodotti</strong><small id="comparehint">Seleziona prodotti da confrontare</small></div><div style="display:flex;gap:6px"><button class="clear" onclick="clearComparison()">Svuota</button><button onclick="openComparison()">Confronta ora ↗</button></div></div>
-<dialog id="comparison"><div class="dialogtop"><div><h2>Confronto prodotti</h2><div class="sub">Controlla i dettagli disponibili prima di decidere.</div></div><button onclick="document.getElementById('comparison').close()">Chiudi ✕</button></div><div id="comparisoncontent" class="tablewrap"></div></dialog>
+<div class="comparebar" id="comparebar">
+<div><strong id="comparetitle">Confronto prodotti</strong><small id="comparehint">Seleziona prodotti da confrontare</small></div>
+<div style="display:flex;gap:6px"><button class="clear" onclick="clearComparison()">Svuota</button><button onclick="openComparison()">Confronta ora ↗</button></div>
+</div>
+
+<dialog id="comparison">
+<div class="dialogtop"><div><h2>Confronto prodotti</h2><div class="sub">Controlla i dettagli disponibili prima di decidere.</div></div><button onclick="el('comparison').close()">Chiudi ✕</button></div>
+<div id="comparisoncontent" class="tablewrap"></div>
+</dialog>
 
 <script>
-const categoriesList=["Tutti","Smartphone","Computer","Tablet","Audio","TV","Casa","Wearable","Gaming","Accessori"];
+const categoryNames=["Tutti","Smartphone","Computer","Tablet","Audio","TV","Casa","Wearable","Gaming","Accessori"];
 const icons={Smartphone:"📱",Computer:"💻",Tablet:"📲",Audio:"🎧",TV:"📺",Casa:"🏠",Wearable:"⌚",Gaming:"🎮",Accessori:"🔌"};
 
-/* Foto illustrative per categoria: non sono necessariamente il modello esatto. */
 const photos={
 Smartphone:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=85",
 Computer:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=85",
@@ -141,44 +182,45 @@ Gaming:"https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format
 Accessori:"https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=800&q=85"
 };
 
+/* Prezzi lasciati vuoti: vanno verificati prima della pubblicazione. */
 const seeds=[
-["Apple iPhone 16","Smartphone","Apple",899,"Smartphone Apple con display OLED e fotocamere avanzate.","https://www.apple.com/it/iphone/"],
-["Apple iPhone 16e","Smartphone","Apple",729,"Smartphone Apple della famiglia iPhone 16.","https://www.apple.com/it/iphone/"],
-["Samsung Galaxy S25","Smartphone","Samsung",929,"Smartphone della serie Galaxy S.","https://www.samsung.com/it/smartphones/"],
-["Samsung Galaxy A56","Smartphone","Samsung",479,"Smartphone della gamma Galaxy A.","https://www.samsung.com/it/smartphones/"],
-["Google Pixel 9","Smartphone","Google",799,"Smartphone Pixel con funzionalità Google.","https://store.google.com/it/"],
-["Google Pixel 9a","Smartphone","Google",549,"Alternativa Pixel della gamma A.","https://store.google.com/it/"],
-["Xiaomi Redmi Note 14 Pro","Smartphone","Xiaomi",349,"Smartphone della gamma Redmi Note.","https://www.mi.com/it/"],
-["OnePlus 13","Smartphone","OnePlus",999,"Smartphone OnePlus di fascia alta.","https://www.oneplus.com/it"],
-["Motorola Edge 50 Neo","Smartphone","Motorola",399,"Smartphone della famiglia Edge.","https://www.motorola.com/it/"],
-["Nothing Phone (3a)","Smartphone","Nothing",379,"Smartphone Nothing con design caratteristico.","https://nothing.tech/"],
-["Apple MacBook Air","Computer","Apple",1229,"Portatile Apple della gamma Air.","https://www.apple.com/it/macbook-air/"],
-["Apple Mac mini","Computer","Apple",729,"Computer desktop compatto Apple.","https://www.apple.com/it/mac-mini/"],
-["ASUS Zenbook 14","Computer","ASUS",999,"Portatile della gamma Zenbook.","https://www.asus.com/it/"],
-["Lenovo IdeaPad Slim","Computer","Lenovo",649,"Portatile della famiglia IdeaPad.","https://www.lenovo.com/it/"],
-["HP Pavilion","Computer","HP",699,"Computer portatile della gamma Pavilion.","https://www.hp.com/it-it/"],
-["Acer Aspire 5","Computer","Acer",599,"Portatile della famiglia Aspire.","https://www.acer.com/it-it/"],
-["Dell Inspiron","Computer","Dell",749,"Computer della gamma Inspiron.","https://www.dell.com/it-it"],
-["Microsoft Surface Laptop","Computer","Microsoft",1099,"Portatile Microsoft Surface.","https://www.microsoft.com/it-it/surface"],
-["Apple iPad","Tablet","Apple",399,"Tablet Apple della gamma iPad.","https://www.apple.com/it/ipad/"],
-["Apple iPad Air","Tablet","Apple",719,"Tablet Apple della famiglia Air.","https://www.apple.com/it/ipad-air/"],
-["Samsung Galaxy Tab S10 FE","Tablet","Samsung",579,"Tablet Samsung della famiglia Galaxy Tab.","https://www.samsung.com/it/tablets/"],
-["Samsung Galaxy Tab A9","Tablet","Samsung",199,"Tablet Android della gamma Galaxy Tab A.","https://www.samsung.com/it/tablets/"],
-["Lenovo Tab","Tablet","Lenovo",179,"Tablet Lenovo per uso quotidiano.","https://www.lenovo.com/it/"],
-["Xiaomi Pad","Tablet","Xiaomi",299,"Tablet Xiaomi della gamma Pad.","https://www.mi.com/it/"],
-["Sony WH-1000XM5","Audio","Sony",299,"Cuffie wireless con cancellazione del rumore.","https://www.sony.it/"],
-["Apple AirPods 4","Audio","Apple",149,"Auricolari wireless Apple.","https://www.apple.com/it/airpods/"],
-["Samsung Galaxy Buds","Audio","Samsung",149,"Auricolari wireless Samsung.","https://www.samsung.com/it/"],
-["JBL Tune","Audio","JBL",79,"Cuffie della gamma JBL Tune.","https://www.jbl.com/"],
-["Bose QuietComfort","Audio","Bose",299,"Cuffie Bose della gamma QuietComfort.","https://www.bose.it/"],
-["LG OLED C4","TV","LG",1199,"Televisore OLED della gamma LG C.","https://www.lg.com/it/"],
-["Samsung OLED S90","TV","Samsung",1399,"Televisore OLED Samsung.","https://www.samsung.com/it/tvs/"],
-["Sony BRAVIA","TV","Sony",999,"Televisore della gamma Sony BRAVIA.","https://www.sony.it/"],
-["Philips Ambilight","TV","Philips",799,"Televisore Philips con tecnologia Ambilight su modelli compatibili.","https://www.philips.it/"],
-["Ninja Air Fryer","Casa","Ninja",149,"Friggitrice ad aria della gamma Ninja.","https://ninjakitchen.it/"],
-["Philips Airfryer","Casa","Philips",129,"Friggitrice ad aria Philips.","https://www.philips.it/"],
-["De'Longhi Magnifica","Casa","De'Longhi",499,"Macchina automatica per caffè.","https://www.delonghi.com/it-it"],
-["Dyson V8","Casa","Dyson",399,"Aspirapolvere senza filo della gamma Dyson V.","https://www.dyson.it/"]
+["Apple iPhone 16","Smartphone","Apple","Smartphone Apple con display OLED e fotocamere avanzate.","https://www.apple.com/it/iphone/"],
+["Apple iPhone 16e","Smartphone","Apple","Smartphone Apple della famiglia iPhone 16.","https://www.apple.com/it/iphone/"],
+["Samsung Galaxy S25","Smartphone","Samsung","Smartphone della serie Galaxy S.","https://www.samsung.com/it/smartphones/"],
+["Samsung Galaxy A56","Smartphone","Samsung","Smartphone della gamma Galaxy A.","https://www.samsung.com/it/smartphones/"],
+["Google Pixel 9","Smartphone","Google","Smartphone Pixel con funzionalità Google.","https://store.google.com/it/"],
+["Google Pixel 9a","Smartphone","Google","Alternativa Pixel della gamma A.","https://store.google.com/it/"],
+["Xiaomi Redmi Note 14 Pro","Smartphone","Xiaomi","Smartphone della gamma Redmi Note.","https://www.mi.com/it/"],
+["OnePlus 13","Smartphone","OnePlus","Smartphone OnePlus di fascia alta.","https://www.oneplus.com/it"],
+["Motorola Edge 50 Neo","Smartphone","Motorola","Smartphone della famiglia Edge.","https://www.motorola.com/it/"],
+["Nothing Phone (3a)","Smartphone","Nothing","Smartphone Nothing con design caratteristico.","https://nothing.tech/"],
+["Apple MacBook Air","Computer","Apple","Portatile Apple della gamma Air.","https://www.apple.com/it/macbook-air/"],
+["Apple Mac mini","Computer","Apple","Computer desktop compatto Apple.","https://www.apple.com/it/mac-mini/"],
+["ASUS Zenbook 14","Computer","ASUS","Portatile della gamma Zenbook.","https://www.asus.com/it/"],
+["Lenovo IdeaPad Slim","Computer","Lenovo","Portatile della famiglia IdeaPad.","https://www.lenovo.com/it/"],
+["HP Pavilion","Computer","HP","Computer portatile della gamma Pavilion.","https://www.hp.com/it-it/"],
+["Acer Aspire 5","Computer","Acer","Portatile della famiglia Aspire.","https://www.acer.com/it-it/"],
+["Dell Inspiron","Computer","Dell","Computer della gamma Inspiron.","https://www.dell.com/it-it"],
+["Microsoft Surface Laptop","Computer","Microsoft","Portatile Microsoft Surface.","https://www.microsoft.com/it-it/surface"],
+["Apple iPad","Tablet","Apple","Tablet Apple della gamma iPad.","https://www.apple.com/it/ipad/"],
+["Apple iPad Air","Tablet","Apple","Tablet Apple della famiglia Air.","https://www.apple.com/it/ipad-air/"],
+["Samsung Galaxy Tab S10 FE","Tablet","Samsung","Tablet Samsung della famiglia Galaxy Tab.","https://www.samsung.com/it/tablets/"],
+["Samsung Galaxy Tab A9","Tablet","Samsung","Tablet Android della gamma Galaxy Tab A.","https://www.samsung.com/it/tablets/"],
+["Lenovo Tab","Tablet","Lenovo","Tablet Lenovo per uso quotidiano.","https://www.lenovo.com/it/"],
+["Xiaomi Pad","Tablet","Xiaomi","Tablet Xiaomi della gamma Pad.","https://www.mi.com/it/"],
+["Sony WH-1000XM5","Audio","Sony","Cuffie wireless con cancellazione del rumore.","https://www.sony.it/"],
+["Apple AirPods 4","Audio","Apple","Auricolari wireless Apple.","https://www.apple.com/it/airpods/"],
+["Samsung Galaxy Buds","Audio","Samsung","Auricolari wireless Samsung.","https://www.samsung.com/it/"],
+["JBL Tune","Audio","JBL","Cuffie della gamma JBL Tune.","https://www.jbl.com/"],
+["Bose QuietComfort","Audio","Bose","Cuffie Bose della gamma QuietComfort.","https://www.bose.it/"],
+["LG OLED C4","TV","LG","Televisore OLED della gamma LG C.","https://www.lg.com/it/"],
+["Samsung OLED S90","TV","Samsung","Televisore OLED Samsung.","https://www.samsung.com/it/tvs/"],
+["Sony BRAVIA","TV","Sony","Televisore della gamma Sony BRAVIA.","https://www.sony.it/"],
+["Philips Ambilight","TV","Philips","Televisore Philips con tecnologia Ambilight su modelli compatibili.","https://www.philips.it/"],
+["Ninja Air Fryer","Casa","Ninja","Friggitrice ad aria della gamma Ninja.","https://ninjakitchen.it/"],
+["Philips Airfryer","Casa","Philips","Friggitrice ad aria Philips.","https://www.philips.it/"],
+["De'Longhi Magnifica","Casa","De'Longhi","Macchina automatica per caffè.","https://www.delonghi.com/it-it"],
+["Dyson V8","Casa","Dyson","Aspirapolvere senza filo della gamma Dyson V.","https://www.dyson.it/"]
 ];
 
 const families={
@@ -193,94 +235,128 @@ Gaming:[["Sony","PlayStation"],["Microsoft","Xbox"],["Nintendo","Switch"],["Logi
 Accessori:[["Anker","Power"],["Belkin","Boost"],["Logitech","MX"],["Apple","MagSafe"],["Samsung","Charger"]]
 };
 
-const products=seeds.map((s,i)=>({id:i+1,name:s[0],category:s[1],brand:s[2],price:s[3],description:s[4],source:s[5],verified:false}));
+const products=seeds.map((s,i)=>({
+id:i+1,name:s[0],category:s[1],brand:s[2],price:null,
+description:s[3],source:s[4],placeholder:false
+}));
+
 let nextId=products.length+1;
-for(const category of Object.keys(families)){
- const list=families[category];
- let n=1;
- while(products.length<500&&n<=1000){
-  const f=list[(n-1)%list.length];
-  products.push({id:nextId++,name:`${f[0]} ${f[1]} — modello da verificare ${String(n).padStart(3,"0")}`,category,brand:f[0],price:null,description:"Scheda segnaposto: modello, specifiche, prezzo e disponibilità da verificare.",source:"",verified:false});
-  n++;
- }
-}
+const categoryKeys=Object.keys(families);
+const categoryCounters=Object.fromEntries(categoryKeys.map(c=>[c,1]));
+let categoryCursor=0;
+
+/* Distribuisce i segnaposto fra tutte le categorie fino a 500 schede. */
 while(products.length<500){
- const f=families.Accessori[products.length%families.Accessori.length];
- products.push({id:nextId++,name:`${f[0]} ${f[1]} — modello da verificare ${products.length}`,category:"Accessori",brand:f[0],price:null,description:"Scheda segnaposto: dati da verificare.",source:"",verified:false});
+const category=categoryKeys[categoryCursor%categoryKeys.length];
+const list=families[category];
+const n=categoryCounters[category]++;
+const f=list[(n-1)%list.length];
+products.push({
+id:nextId++,
+name:`${f[0]} ${f[1]} — scheda da verificare ${String(n).padStart(3,"0")}`,
+category,brand:f[0],price:null,
+description:"Scheda segnaposto: modello, specifiche, prezzo e disponibilità da verificare.",
+source:"",placeholder:true
+});
+categoryCursor++;
 }
 
 let activeCategory="Tutti",page=1,comparisonIds=[];
 const perPage=24;
 const el=id=>document.getElementById(id);
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+function escapeHTML(s){
+return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
 function renderCategories(){
- el("categories").innerHTML=categoriesList.map(c=>`<button class="cat ${activeCategory===c?"active":""}" onclick="setCategory('${c}')">${c}</button>`).join("");
+el("categories").innerHTML=categoryNames.map(c=>`<button class="cat ${activeCategory===c?"active":""}" onclick="setCategory('${c}')">${c}</button>`).join("");
 }
 function setCategory(c){activeCategory=c;page=1;renderCategories();renderProducts()}
 function applySearch(){page=1;renderProducts()}
-function resetFilters(){el("search").value="";el("budget").value="";el("brand").value="";el("sort").value="recommended";activeCategory="Tutti";page=1;renderCategories();renderProducts()}
+function resetFilters(){
+el("search").value="";el("budget").value="";el("brand").value="";
+el("sort").value="recommended";activeCategory="Tutti";page=1;
+renderCategories();renderProducts();
+}
 function getFiltered(){
- let list=products.filter(p=>{
-  const q=el("search").value.trim().toLowerCase(),budget=Number(el("budget").value);
-  return(activeCategory==="Tutti"||p.category===activeCategory)&&(!q||`${p.name} ${p.category} ${p.brand} ${p.description}`.toLowerCase().includes(q))&&(!el("brand").value||p.brand===el("brand").value)&&(!budget||(p.price!==null&&p.price<=budget));
- });
- const sort=el("sort").value;
- if(sort==="priceAsc")list.sort((a,b)=>(a.price??Infinity)-(b.price??Infinity));
- if(sort==="priceDesc")list.sort((a,b)=>(b.price??-Infinity)-(a.price??-Infinity));
- if(sort==="name")list.sort((a,b)=>a.name.localeCompare(b.name,"it"));
- return list;
+let list=products.filter(p=>{
+const q=el("search").value.trim().toLowerCase();
+const budget=Number(el("budget").value);
+return (activeCategory==="Tutti"||p.category===activeCategory)
+&&(!q||`${p.name} ${p.category} ${p.brand} ${p.description}`.toLowerCase().includes(q))
+&&(!el("brand").value||p.brand===el("brand").value)
+&&(!budget||(p.price!==null&&p.price<=budget));
+});
+const sort=el("sort").value;
+if(sort==="priceAsc")list.sort((a,b)=>(a.price??Infinity)-(b.price??Infinity));
+if(sort==="priceDesc")list.sort((a,b)=>(b.price??-Infinity)-(a.price??-Infinity));
+if(sort==="name")list.sort((a,b)=>a.name.localeCompare(b.name,"it"));
+return list;
 }
 function renderProducts(){
- const list=getFiltered(),pages=Math.max(1,Math.ceil(list.length/perPage));
- if(page>pages)page=pages;
- el("status").textContent=`${list.length} risultati · Pagina ${page} di ${pages}`;
- const shown=list.slice((page-1)*perPage,page*perPage);
- el("products").innerHTML=shown.length?shown.map(p=>`
- <article class="card">
-  <div class="photo">
-   <img class="category-photo" loading="lazy" src="${photos[p.category]||photos.Accessori}" alt="Immagine illustrativa della categoria ${escapeHTML(p.category)}" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=&quot;font-size:60px&quot;>${icons[p.category]||"📦"}</span>'">
-  </div>
-  <span class="tag ${p.price===null?"verify":""}">${p.price===null?"Da verificare":p.category}</span>
-  <h3>${escapeHTML(p.name)}</h3>
-  <div class="description">${escapeHTML(p.description)}</div>
-  <div class="price ${p.price===null?"na":""}">${p.price===null?"Prezzo non verificato":"€ "+p.price.toLocaleString("it-IT")}</div>
-  <div class="source">${p.price===null?"Nessun prezzo verificato":"Prezzo indicativo, da confermare"}</div>
-  <div class="actions"><button onclick="details(${p.id})">Dettagli</button><button class="compare ${comparisonIds.includes(p.id)?"selected":""}" onclick="toggleCompare(${p.id})">${comparisonIds.includes(p.id)?"✓ Selezionato":"⇄ Confronta"}</button></div>
- </article>`).join(""):`<div class="empty">Nessun risultato trovato. Prova a cambiare ricerca o filtri.</div>`;
- el("pagination").innerHTML=`<button ${page===1?"disabled":""} onclick="changePage(-1)">← Precedente</button><span class="sub">${page} / ${pages}</span><button ${page===pages?"disabled":""} onclick="changePage(1)">Successiva →</button>`;
+const list=getFiltered(),pages=Math.max(1,Math.ceil(list.length/perPage));
+if(page>pages)page=pages;
+el("status").textContent=`${list.length} risultati · Pagina ${page} di ${pages}`;
+const shown=list.slice((page-1)*perPage,page*perPage);
+el("products").innerHTML=shown.length?shown.map(p=>`
+<article class="card">
+<div class="photo">
+<img loading="lazy" class="${p.placeholder?"category-photo":"product-photo"}"
+src="${photos[p.category]||photos.Accessori}"
+alt="Immagine illustrativa: ${escapeHTML(p.category)}"
+onerror="this.outerHTML='<span class=&quot;fallback&quot;>${icons[p.category]||"📦"}</span>'">
+</div>
+<span class="tag ${p.price===null?"verify":""}">${p.price===null?"Da verificare":p.category}</span>
+<h3>${escapeHTML(p.name)}</h3>
+<div class="description">${escapeHTML(p.description)}</div>
+<div class="price ${p.price===null?"na":""}">${p.price===null?"Prezzo non verificato":"€ "+p.price.toLocaleString("it-IT")}</div>
+<div class="source">${p.price===null?"Nessun prezzo verificato":"Prezzo indicativo, da confermare"}</div>
+<div class="actions">
+<button onclick="details(${p.id})">Dettagli</button>
+<button class="compare ${comparisonIds.includes(p.id)?"selected":""}" onclick="toggleCompare(${p.id})">${comparisonIds.includes(p.id)?"✓ Selezionato":"⇄ Confronta"}</button>
+</div>
+</article>`).join(""):`<div class="empty">Nessun risultato trovato. Prova a cambiare ricerca o filtri.</div>`;
+el("pagination").innerHTML=`<button ${page===1?"disabled":""} onclick="changePage(-1)">← Precedente</button><span class="sub">${page} / ${pages}</span><button ${page===pages?"disabled":""} onclick="changePage(1)">Successiva →</button>`;
 }
 function changePage(d){page+=d;renderProducts();el("catalogo").scrollIntoView({behavior:"smooth"})}
 function details(id){
- const p=products.find(x=>x.id===id);
- const price=p.price===null?"Non disponibile / da verificare":"€ "+p.price.toLocaleString("it-IT")+" (indicativo, da confermare)";
- const link=p.source?`<p><a href="${p.source}" target="_blank" rel="noopener noreferrer">Visita il sito del produttore ↗</a></p>`:"<p>Fonte prodotto non ancora inserita.</p>";
- el("comparisoncontent").innerHTML=`<h3>${escapeHTML(p.name)}</h3><p><strong>Categoria:</strong> ${escapeHTML(p.category)}</p><p><strong>Marchio:</strong> ${escapeHTML(p.brand)}</p><p><strong>Prezzo:</strong> ${price}</p><p>${escapeHTML(p.description)}</p><p class="sub">La foto mostrata è illustrativa e potrebbe non rappresentare il modello esatto.</p>${link}<p class="sub">Verifica le informazioni presso il produttore o il rivenditore.</p>`;
- el("comparison").showModal();
+const p=products.find(x=>x.id===id);
+const price=p.price===null?"Non disponibile / da verificare":"€ "+p.price.toLocaleString("it-IT")+" (indicativo, da confermare)";
+const link=p.source?`<p><a href="${p.source}" target="_blank" rel="noopener noreferrer">Visita il sito del produttore ↗</a></p>`:"<p>Fonte prodotto non ancora inserita.</p>";
+el("comparisoncontent").innerHTML=`<h3>${escapeHTML(p.name)}</h3><p><strong>Categoria:</strong> ${escapeHTML(p.category)}</p><p><strong>Marchio:</strong> ${escapeHTML(p.brand)}</p><p><strong>Prezzo:</strong> ${price}</p><p>${escapeHTML(p.description)}</p><p class="sub">L'immagine è illustrativa e potrebbe non rappresentare il modello esatto. Verifica sempre le informazioni presso il produttore o il rivenditore.</p>${link}`;
+el("comparison").showModal();
 }
 function toggleCompare(id){
- if(comparisonIds.includes(id))comparisonIds=comparisonIds.filter(x=>x!==id);
- else if(comparisonIds.length<3)comparisonIds.push(id);
- else{alert("Puoi confrontare al massimo 3 prodotti.");return}
- updateCompare();renderProducts();
+if(comparisonIds.includes(id))comparisonIds=comparisonIds.filter(x=>x!==id);
+else if(comparisonIds.length<3)comparisonIds.push(id);
+else{alert("Puoi confrontare al massimo 3 prodotti alla volta.");return}
+updateCompare();renderProducts();
 }
 function updateCompare(){
- el("navcount").textContent=comparisonIds.length;
- el("comparetitle").textContent=`${comparisonIds.length} prodotti selezionati`;
- el("comparehint").textContent=comparisonIds.length?"Pronti per il confronto":"Seleziona fino a tre prodotti";
- el("comparebar").classList.toggle("show",comparisonIds.length>0);
+el("navcount").textContent=comparisonIds.length;
+el("comparetitle").textContent=`${comparisonIds.length} prodotti selezionati`;
+el("comparehint").textContent=comparisonIds.length?"Pronti per il confronto":"Seleziona fino a tre prodotti";
+el("comparebar").classList.toggle("show",comparisonIds.length>0);
 }
 function clearComparison(){comparisonIds=[];updateCompare();renderProducts()}
 function openComparison(){
- if(!comparisonIds.length){alert("Seleziona almeno un prodotto da confrontare.");return}
- const selected=comparisonIds.map(id=>products.find(p=>p.id===id));
- const rows=[["Categoria",p=>p.category],["Marchio",p=>p.brand],["Prezzo",p=>p.price===null?"Da verificare":"€ "+p.price.toLocaleString("it-IT")],["Descrizione",p=>p.description],["Stato dati",p=>p.price===null?"Scheda da completare":"Prezzo indicativo da confermare"],["Fonte",p=>p.source?`<a href="${p.source}" target="_blank" rel="noopener noreferrer">Sito produttore ↗</a>`:"Non inserita"]];
- el("comparisoncontent").innerHTML=`<table><thead><tr><th>Caratteristica</th>${selected.map(p=>`<th>${escapeHTML(p.name)}</th>`).join("")}</tr></thead><tbody>${rows.map(([label,fn])=>`<tr><th>${label}</th>${selected.map(p=>`<td>${label==="Fonte"?fn(p):escapeHTML(fn(p))}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
- el("comparison").showModal();
+if(!comparisonIds.length){alert("Seleziona almeno un prodotto da confrontare.");return}
+const selected=comparisonIds.map(id=>products.find(p=>p.id===id));
+const rows=[
+["Categoria",p=>p.category],
+["Marchio",p=>p.brand],
+["Prezzo",p=>p.price===null?"Da verificare":"€ "+p.price.toLocaleString("it-IT")],
+["Descrizione",p=>p.description],
+["Stato dati",p=>p.price===null?"Scheda da completare":"Prezzo indicativo da confermare"],
+["Fonte",p=>p.source?`<a href="${p.source}" target="_blank" rel="noopener noreferrer">Sito produttore ↗</a>`:"Non inserita"]
+];
+el("comparisoncontent").innerHTML=`<table><thead><tr><th>Caratteristica</th>${selected.map(p=>`<th>${escapeHTML(p.name)}</th>`).join("")}</tr></thead><tbody>${rows.map(([label,fn])=>`<tr><th>${label}</th>${selected.map(p=>`<td>${label==="Fonte"?fn(p):escapeHTML(fn(p))}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+el("comparison").showModal();
 }
 function init(){
- const brands=[...new Set(products.map(p=>p.brand))].sort((a,b)=>a.localeCompare(b,"it"));
- el("brand").innerHTML='<option value="">Tutti i marchi</option>'+brands.map(b=>`<option value="${escapeHTML(b)}">${escapeHTML(b)}</option>`).join("");
- renderCategories();renderProducts();updateCompare();
+const brands=[...new Set(products.map(p=>p.brand))].sort((a,b)=>a.localeCompare(b,"it"));
+el("brand").innerHTML='<option value="">Tutti i marchi</option>'+brands.map(b=>`<option value="${escapeHTML(b)}">${escapeHTML(b)}</option>`).join("");
+renderCategories();renderProducts();updateCompare();
 }
 el("search").addEventListener("input",()=>{page=1;renderProducts()});
 el("budget").addEventListener("input",()=>{page=1;renderProducts()});
